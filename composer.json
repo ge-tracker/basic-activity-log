@@ -2,7 +2,6 @@
     "name": "spatie/activitylog",
     "description": "A very simple activity logger to monitor the users of your website or application",
     "homepage": "https://github.com/spatie/activitylog",
-    "abandoned" : "This package has been replaced by spatie/laravel-activitylog",
     "keywords":
         [
             "log",
@@ -17,11 +16,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "5.*"
-
+        "php": "^7.2",
+        "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "phpunit/phpunit": "~4.0",
         "mockery/mockery": "0.9.*"
     },
@@ -31,6 +30,16 @@
         ],
         "psr-0": {
             "Spatie\\Activitylog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\Activitylog\\ActivitylogServiceProvider"
+            ],
+            "aliases": {
+                "Activity": "Spatie\\Activitylog\\ActivitylogFacade"
+            }
         }
     },
     "license": "MIT"

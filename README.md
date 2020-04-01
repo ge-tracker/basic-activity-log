@@ -12,13 +12,9 @@ This package has been abandoned on 2016-06-28. Please use [laravel-activitylog](
 
 ## Description
 
-This Laravel 5 package provides a very easy to use solution to log the activities of the users of your Laravel 5 app. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
+This Laravel package provides a very easy to use solution to log the activities of the users of your Laravel app. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
-
-### Note:
-
-If you're using Laravel 4, take a look at version 0.3.0 of this package.
 
 ## Postcardware
 
@@ -35,35 +31,13 @@ This package can be installed through Composer.
 composer require spatie/activitylog
 ```
 
-
-This service provider must be registered.
-```php
-// config/app.php
-
-'providers' => [
-    '...',
-    'Spatie\Activitylog\ActivitylogServiceProvider',
-];
-```
-
+This service provider will automatically be registered.
 
 You'll also need to publish and run the migration in order to create the db-table.
 ```
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
 php artisan migrate
 ```
-
-
-Activitylog also comes with a facade, which provides an easy way to call it.
-```php
-// config/app.php
-
-'aliases' => [
-	...
-	'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
-];
-```
-
 
 Optionally you can publish the config file of this package.
 ```
