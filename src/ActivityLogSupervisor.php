@@ -2,12 +2,9 @@
 
 namespace GeTracker\BasicActivityLog;
 
-use Config;
-use GeTracker\BasicActivityLog\Handlers\BeforeHandler;
 use GeTracker\BasicActivityLog\Handlers\DefaultLaravelHandler;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
-use Request;
 
 class ActivityLogSupervisor
 {
@@ -32,7 +29,8 @@ class ActivityLogSupervisor
         Handlers\ActivityLogHandlerInterface $logHandler,
         Repository $config,
         Guard $auth
-    ) {
+    )
+    {
         $this->config = $config;
 
         $this->logHandlers[] = $logHandler;
@@ -47,8 +45,8 @@ class ActivityLogSupervisor
     /**
      * Log some activity to all registered log handlers.
      *
-     * @param $text
-     * @param string|int $userId
+     * @param            $text
+     * @param int|string $userId
      *
      * @return bool
      */
@@ -56,11 +54,11 @@ class ActivityLogSupervisor
     {
         $userId = $this->normalizeUserId($userId);
 
-        if (! $this->shouldLogCall($text, $userId)) {
+        if (!$this->shouldLogCall($text, $userId)) {
             return false;
         }
 
-        $ipAddress = Request::getClientIp();
+        $ipAddress = request()->getClientIp();
 
         foreach ($this->logHandlers as $logHandler) {
             $logHandler->log($text, $userId, compact('ipAddress'));
