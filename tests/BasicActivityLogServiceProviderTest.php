@@ -3,17 +3,11 @@
 namespace Tests;
 
 use GeTracker\BasicActivityLog\ActivityLogSupervisor;
-use GeTracker\BasicActivityLog\BasicActivityLogServiceProvider;
 use GeTracker\BasicActivityLog\Handlers\ActivityLogHandlerInterface;
 use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
 
-class BasicActivityLogServiceProviderTest extends \Orchestra\Testbench\TestCase
+class BasicActivityLogServiceProviderTest extends TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [BasicActivityLogServiceProvider::class];
-    }
-
     /** @test */
     public function it_should_resolve_supervisor(): void
     {

@@ -28,13 +28,16 @@ class ActivityLogSupervisor
      * @param Repository                           $config
      * @param Guard                                $auth
      */
-    public function __construct(Handlers\ActivityLogHandlerInterface $logHandler, Repository $config, Guard $auth)
-    {
+    public function __construct(
+        Handlers\ActivityLogHandlerInterface $logHandler,
+        Repository $config,
+        Guard $auth
+    ) {
         $this->config = $config;
 
         $this->logHandlers[] = $logHandler;
 
-        if ($this->config->get('activitylog.alsoLogInDefaultLog')) {
+        if ($this->config->get('basic-activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
 
@@ -45,7 +48,7 @@ class ActivityLogSupervisor
      * Log some activity to all registered log handlers.
      *
      * @param $text
-     * @param string $userId
+     * @param string|int $userId
      *
      * @return bool
      */
@@ -74,7 +77,9 @@ class ActivityLogSupervisor
     public function cleanLog()
     {
         foreach ($this->logHandlers as $logHandler) {
-            $logHandler->cleanLog(Config::get('activitylog.deleteRecordsOlderThanMonths'));
+            $logHandler->cleanLog(
+                $this->config->get('basic-activitylog.deleteRecordsOlderThanMonths')
+            );
         }
 
         return true;
@@ -85,7 +90,7 @@ class ActivityLogSupervisor
      *
      * @param object|int $userId
      *
-     * @return int
+     * @return int|string
      */
     public function normalizeUserId($userId)
     {
@@ -101,9 +106,9 @@ class ActivityLogSupervisor
             return $this->auth->user()->id;
         }
 
-        if (is_numeric($this->config->get('activitylog.defaultUserId'))) {
-            return $this->config->get('activitylog.defaultUserId');
-        };
+        if (is_numeric($this->config->get('basic-activitylog.defaultUserId'))) {
+            return $this->config->get('basic-activitylog.defaultUserId');
+        }
 
         return '';
     }
@@ -118,9 +123,9 @@ class ActivityLogSupervisor
      */
     protected function shouldLogCall($text, $userId)
     {
-        $beforeHandler = $this->config->get('activitylog.beforeHandler');
+        $beforeHandler = $this->config->get('basic-activitylog.beforeHandler');
 
-        if (is_null($beforeHandler) || $beforeHandler == '') {
+        if ($beforeHandler === null || $beforeHandler === '') {
             return true;
         }
 

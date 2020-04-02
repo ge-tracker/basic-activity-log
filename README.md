@@ -29,7 +29,7 @@ Optionally you can publish the config file of this package.
 ```
 php artisan vendor:publish --provider="GeTracker\BasicActivityLog\BasicActivityLogServiceProvider" --tag="config"
 ```
-The configuration will be written to  ```config/basic-activitylog.php```. The options provided are self explanatory.
+The configuration will be written to  ```config/basic-basic-activitylog.php```. The options provided are self explanatory.
 
 
 ## Usage

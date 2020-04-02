@@ -20,9 +20,9 @@
             "homepage": "https://www.ge-tracker.com"
         }
     ],
-
     "require": {
         "php": "^7.2",
+        "illuminate/database": "^6.0|^7.0",
         "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
@@ -32,17 +32,23 @@
         "orchestra/testbench": "^5.1"
     },
     "autoload": {
-        "classmap": [
-            "migrations/"
-        ],
         "psr-4": {
             "GeTracker\\BasicActivityLog\\": "src/"
-        }
+        },
+        "classmap": [
+            "migrations/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "classmap": [
+            "migrations/"
+        ]
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "laravel": {

@@ -9,7 +9,7 @@ use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
 use Mockery;
 
-class ActivityLogSupervisorTest extends \Orchestra\Testbench\TestCase
+class ActivityLogSupervisorTest extends TestCase
 {
     /** @var EloquentHandler|\Mockery\LegacyMockInterface|\Mockery\MockInterface Ac */
     protected $logHandler;
@@ -38,11 +38,6 @@ class ActivityLogSupervisorTest extends \Orchestra\Testbench\TestCase
             $this->config,
             $this->auth
         );
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [BasicActivityLogServiceProvider::class];
     }
 
     /**
