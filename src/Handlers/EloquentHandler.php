@@ -11,7 +11,7 @@ class EloquentHandler implements ActivityLogHandlerInterface
      * Log activity in an Eloquent model.
      *
      * @param string $text
-     * @param $userId
+     * @param        $userId
      * @param array  $attributes
      *
      * @return bool
@@ -20,8 +20,8 @@ class EloquentHandler implements ActivityLogHandlerInterface
     {
         Activity::create(
             [
-                'text' => $text,
-                'user_id' => ($userId == '' ? null : $userId),
+                'text'       => $text,
+                'user_id'    => ($userId === '' ? null : $userId),
                 'ip_address' => $attributes['ipAddress'],
             ]
         );

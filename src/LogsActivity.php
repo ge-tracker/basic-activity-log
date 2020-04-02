@@ -2,8 +2,6 @@
 
 namespace GeTracker\BasicActivityLog;
 
-use Activity;
-
 trait LogsActivity
 {
     protected static function bootLogsActivity()
@@ -13,8 +11,10 @@ trait LogsActivity
 
                 $message = $model->getActivityDescriptionForEvent($eventName);
 
-                if ($message != '') {
-                    Activity::log($message);
+                if ($message !== '') {
+                    /** @var ActivityLogSupervisor $activty */
+                    $activty = app('basic-activity');
+                    $activty->log($message);
                 }
             });
         }
@@ -28,12 +28,8 @@ trait LogsActivity
      */
     protected static function getRecordActivityEvents()
     {
-        if (isset(static::$recordEvents)) {
-            return static::$recordEvents;
-        }
-
-        return [
-            'created', 'updated', 'deleting', 'deleted',
-        ];
+        return static::$recordEvents ?? [
+                'created', 'updated', 'deleting', 'deleted',
+            ];
     }
 }
