@@ -38,8 +38,6 @@ class ActivityLogSupervisorTest extends TestCase
             $this->config,
             $this->auth
         );
-
-        $this->activityLogSupervisor->log()
     }
 
     /**
