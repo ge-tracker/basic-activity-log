@@ -3,6 +3,7 @@
 namespace Tests;
 
 use GeTracker\BasicActivityLog\ActivityLogSupervisor;
+use GeTracker\BasicActivityLog\BasicActivityLogServiceProvider;
 use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
@@ -39,10 +40,10 @@ class ActivityLogSupervisorTest extends \Orchestra\Testbench\TestCase
         );
     }
 
-//    protected function getPackageProviders($app)
-//    {
-//        return [\GeTracker\BasicActivityLog\BasicActivityLogServiceProvider::class];
-//    }
+    protected function getPackageProviders($app)
+    {
+        return [BasicActivityLogServiceProvider::class];
+    }
 
     /**
      * @test
