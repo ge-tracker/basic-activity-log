@@ -1,18 +1,25 @@
 <?php
 
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Config\Repository;
-use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
-use GeTracker\BasicActivityLog\ActivityLogSupervisor;
+namespace Tests;
 
-class ActivityLogSupervisorTest extends \PHPUnit\Framework\TestCase
+use GeTracker\BasicActivityLog\ActivityLogSupervisor;
+use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
+use Illuminate\Config\Repository;
+use Illuminate\Contracts\Auth\Guard;
+use Mockery;
+
+class ActivityLogSupervisorTest extends \Orchestra\Testbench\TestCase
 {
+    /** @var EloquentHandler|\Mockery\LegacyMockInterface|\Mockery\MockInterface Ac */
     protected $logHandler;
 
+    /** @var ActivityLogSupervisor */
     protected $activityLogSupervisor;
 
+    /** @var Repository|\Mockery\LegacyMockInterface|\Mockery\MockInterface */
     protected $config;
 
+    /** @var Guard|\Mockery\LegacyMockInterface|\Mockery\MockInterface */
     protected $auth;
 
     protected function setUp(): void
@@ -32,10 +39,15 @@ class ActivityLogSupervisorTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+//    protected function getPackageProviders($app)
+//    {
+//        return [\GeTracker\BasicActivityLog\BasicActivityLogServiceProvider::class];
+//    }
+
     /**
      * @test
      */
-    public function it_normalizes_an_empty_user_id_when_noone_is_logged_in()
+    public function it_normalizes_an_empty_user_id_when_noone_is_logged_in(): void
     {
         $this->auth->shouldReceive('check')->andReturn(false);
 
@@ -47,7 +59,7 @@ class ActivityLogSupervisorTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      */
-    public function it_normalizes_an_empty_user_id_when_someone_is_logged_in()
+    public function it_normalizes_an_empty_user_id_when_someone_is_logged_in(): void
     {
         $user = json_decode(json_encode(['id' => 123]), false);
 
@@ -62,7 +74,7 @@ class ActivityLogSupervisorTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      */
-    public function it_normalizes_a_numeric_user_id()
+    public function it_normalizes_a_numeric_user_id(): void
     {
         $normalizedUserId = $this->activityLogSupervisor->normalizeUserId(123);
 
