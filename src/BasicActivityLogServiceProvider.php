@@ -18,7 +18,14 @@ class BasicActivityLogServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/basic-basic-activitylog.php' => config_path('basic-basic-activitylog.php'),
         ], 'config');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations/');
+        if (!$this->migrationHasAlreadyBeenPublished()) {
+            // Publish migration
+            $timestamp = date('Y_m_d_His', time());
+
+            $this->publishes([
+                __DIR__ . '/../migrations/create_activity_log_table.stub' => database_path("/migrations/{$timestamp}_create_activity_log_table.php"),
+            ], 'migrations');
+        }
     }
 
     /**
