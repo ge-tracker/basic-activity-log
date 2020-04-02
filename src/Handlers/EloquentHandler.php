@@ -1,11 +1,11 @@
 <?php
 
-namespace Spatie\Activitylog\Handlers;
+namespace GeTracker\BasicActivityLog\Handlers;
 
-use Spatie\Activitylog\Models\Activity;
 use Carbon\Carbon;
+use GeTracker\BasicActivityLog\Models\Activity;
 
-class EloquentHandler implements ActivitylogHandlerInterface
+class EloquentHandler implements ActivityLogHandlerInterface
 {
     /**
      * Log activity in an Eloquent model.

@@ -1,15 +1,15 @@
 <?php
 
-namespace Spatie\Activitylog;
+namespace GeTracker\BasicActivityLog;
 
+use Config;
+use GeTracker\BasicActivityLog\Handlers\BeforeHandler;
+use GeTracker\BasicActivityLog\Handlers\DefaultLaravelHandler;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
-use Spatie\Activitylog\Handlers\BeforeHandler;
-use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
 use Request;
-use Config;
 
-class ActivitylogSupervisor
+class ActivityLogSupervisor
 {
     /**
      * @var array logHandlers
@@ -24,11 +24,11 @@ class ActivitylogSupervisor
      * Create the logsupervisor using a default Handler
      * Also register Laravels Log Handler if needed.
      *
-     * @param Handlers\ActivitylogHandlerInterface $logHandler
+     * @param Handlers\ActivityLogHandlerInterface $logHandler
      * @param Repository                           $config
      * @param Guard                                $auth
      */
-    public function __construct(Handlers\ActivitylogHandlerInterface $logHandler, Repository $config, Guard $auth)
+    public function __construct(Handlers\ActivityLogHandlerInterface $logHandler, Repository $config, Guard $auth)
     {
         $this->config = $config;
 

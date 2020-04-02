@@ -1,49 +1,35 @@
 # Log the activity of your users
 
-[![Latest Version](https://img.shields.io/github/release/spatie/activitylog.svg?style=flat-square)](https://github.com/spatie/activitylog/releases)
+[![Latest Version](https://img.shields.io/github/release/ge-tracker/basic-activity-log.svg?style=flat-square)](https://github.com/ge-tracker/basic-activity-log/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/spatie/activitylog/master.svg?style=flat-square)](https://travis-ci.org/spatie/activitylog)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/c48809c7-cdb3-4e86-974b-ad9c6282bc3c.svg)](https://insight.sensiolabs.com/projects/c48809c7-cdb3-4e86-974b-ad9c6282bc3c)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/activitylog)
-
-## EOL-warning
-
-This package has been abandoned on 2016-06-28. Please use [laravel-activitylog](https://github.com/spatie/laravel-activitylog) instead.
+[![Total Downloads](https://img.shields.io/packagist/dt/ge-tracker/basic-activity-log.svg?style=flat-square)](https://packagist.org/packages/ge-tracker/basic-activity-log)
 
 ## Description
 
 This Laravel package provides a very easy to use solution to log the activities of the users of your Laravel app. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
 
-Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
-
-## Postcardware
-
-You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
-
-Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
-
-The best postcards will get published on the open source page on our website.
+This package was originally created by Spatie, a webdesign agency in Antwerp, Belgium. It was forked on 2020-04-01 by GE Tracker and renamed, as we make use of this package in our production application.
 
 ## Installation
 
 This package can be installed through Composer.
 ```bash
-composer require spatie/activitylog
+composer require ge-tracker/basic-activity-log
 ```
 
 This service provider will automatically be registered.
 
 You'll also need to publish and run the migration in order to create the db-table.
 ```
-php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="GeTracker\BasicActivityLog\BasicActivityLogServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
 Optionally you can publish the config file of this package.
 ```
-php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
+php artisan vendor:publish --provider="GeTracker\BasicActivityLog\BasicActivityLogServiceProvider" --tag="config"
 ```
-The configuration will be written to  ```config/activitylog.php```. The options provided are self explanatory.
+The configuration will be written to  ```config/basic-activitylog.php```. The options provided are self explanatory.
 
 
 ## Usage
@@ -70,8 +56,8 @@ The string you pass to function gets written in a db-table together with a times
 This package can log the events from your models. To do so your model must use the `LogsActivity`-trait and implement `LogsActivityInterface`.
 
 ```php
-use Spatie\Activitylog\LogsActivityInterface;
-use Spatie\Activitylog\LogsActivity;
+use GeTracker\BasicActivityLog\LogsActivity;
+use GeTracker\BasicActivityLog\LogsActivityInterface;
 
 class Article implements LogsActivityInterface {
 
@@ -115,7 +101,7 @@ The result of this function will be logged, unless the result is an empty string
 ### Using a before handler.
 If you want to disable logging under certain conditions,
 such as for a specific user, create a class in your application
-namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`.
+namespace that implements the `GeTracker\BasicActivityLog\Handlers\BeforeHandlerInterface`.
 
 This  interface defines an `shouldLog()` method in which you can code any custom logic to determine
 whether logging should be ignored or not. You must return `true` the call should be logged.
@@ -132,7 +118,7 @@ logging a user with id of 1:
 
 namespace App\Handlers;
 
-use Spatie\Activitylog\Handlers\BeforeHandlerInterface;
+use GeTracker\BasicActivityLog\Handlers\BeforeHandlerInterface;
 
 class BeforeHandler implements BeforeHandlerInterface
 {
@@ -149,7 +135,7 @@ class BeforeHandler implements BeforeHandlerInterface
 All events will be logged in the `activity_log`-table. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
 
 ```php
-use Spatie\Activitylog\Models\Activity;
+use GeTracker\BasicActivityLog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
@@ -168,15 +154,13 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+If you discover any security related issues, please email support@ge-tracker.com instead of using the issue tracker.
 
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
+- [GE Tracker](https://github.com/ge-tracker)
 - [All Contributors](../../contributors)
-
-## About Spatie
-Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## License
 

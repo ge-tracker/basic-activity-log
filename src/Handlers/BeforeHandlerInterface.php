@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Activitylog\Handlers;
+namespace GeTracker\BasicActivityLog\Handlers;
 
 interface BeforeHandlerInterface
 {

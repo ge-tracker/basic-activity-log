@@ -1,22 +1,35 @@
 <?php
 
-use Illuminate\Support\Facades\Auth as Auth;
-use Spatie\Activitylog\ActivitylogSupervisor;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Config\Repository;
+use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
+use GeTracker\BasicActivityLog\ActivityLogSupervisor;
 
-class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
+class ActivityLogSupervisorTest extends \PHPUnit\Framework\TestCase
 {
     protected $logHandler;
+
     protected $activityLogSupervisor;
+
     protected $config;
 
-    public function setUp()
+    protected $auth;
+
+    protected function setUp(): void
     {
-        $this->logHandler = Mockery::mock('\Spatie\Activitylog\Handlers\EloquentHandler');
-        $this->config = Mockery::mock('\Illuminate\Config\Repository');
-        $this->auth = Mockery::mock('Illuminate\Contracts\Auth\Guard');
+        parent::setUp();
+
+        $this->logHandler = Mockery::mock(EloquentHandler::class);
+        $this->config = Mockery::mock(Repository::class);
+        $this->auth = Mockery::mock(Guard::class);
 
         $this->config->shouldReceive('get')->andReturn(false);
-        $this->activityLogSupervisor = new ActivitylogSupervisor($this->logHandler, $this->config, $this->auth);
+
+        $this->activityLogSupervisor = new ActivityLogSupervisor(
+            $this->logHandler,
+            $this->config,
+            $this->auth
+        );
     }
 
     /**

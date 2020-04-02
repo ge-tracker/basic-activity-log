@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\Activitylog\Handlers;
+namespace GeTracker\BasicActivityLog\Handlers;
 
 use Log;
 
-class DefaultLaravelHandler implements ActivitylogHandlerInterface
+class DefaultLaravelHandler implements ActivityLogHandlerInterface
 {
     /**
      * Log activity in Laravels log handler.

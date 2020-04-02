@@ -1,7 +1,7 @@
 {
-    "name": "spatie/activitylog",
+    "name": "ge-tracker/basic-activity-log",
     "description": "A very simple activity logger to monitor the users of your website or application",
-    "homepage": "https://github.com/spatie/activitylog",
+    "homepage": "https://github.com/ge-tracker/basic-activity-log",
     "keywords":
         [
             "log",
@@ -33,19 +33,19 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "migrations/"
         ],
-        "psr-0": {
-            "Spatie\\Activitylog\\": "src/"
+        "psr-4": {
+            "GeTracker\\BasicActivityLog\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Activitylog\\ActivitylogServiceProvider"
+                "GeTracker\\BasicActivityLog\\BasicActivityLogServiceProvider"
             ],
             "aliases": {
-                "Activity": "Spatie\\Activitylog\\ActivitylogFacade"
+                "Activity": "GeTracker\\BasicActivityLog\\ActivityLogFacade"
             }
         }
     },

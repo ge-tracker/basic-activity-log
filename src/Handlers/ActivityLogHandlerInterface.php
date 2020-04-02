@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Activitylog\Handlers;
+namespace GeTracker\BasicActivityLog\Handlers;
 
-interface ActivitylogHandlerInterface
+interface ActivityLogHandlerInterface
 {
     /**
      * Log some activity.
