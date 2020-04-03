@@ -1,13 +1,9 @@
 <?php
 
-namespace Tests;
-
 use GeTracker\BasicActivityLog\ActivityLogSupervisor;
-use GeTracker\BasicActivityLog\BasicActivityLogServiceProvider;
 use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
-use Mockery;
 
 class ActivityLogSupervisorTest extends TestCase
 {

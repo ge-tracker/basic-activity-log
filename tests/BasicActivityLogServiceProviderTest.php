@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests;
-
 use GeTracker\BasicActivityLog\ActivityLogSupervisor;
 use GeTracker\BasicActivityLog\Handlers\ActivityLogHandlerInterface;
 use GeTracker\BasicActivityLog\Handlers\EloquentHandler;
