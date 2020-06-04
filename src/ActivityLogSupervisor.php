@@ -29,8 +29,7 @@ class ActivityLogSupervisor
         Handlers\ActivityLogHandlerInterface $logHandler,
         Repository $config,
         Guard $auth
-    )
-    {
+    ) {
         $this->config = $config;
 
         $this->logHandlers[] = $logHandler;
