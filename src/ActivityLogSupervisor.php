@@ -2,6 +2,7 @@
 
 namespace GeTracker\BasicActivityLog;
 
+use GeTracker\BasicActivityLog\Handlers\ActivityLogHandlerInterface;
 use GeTracker\BasicActivityLog\Handlers\DefaultLaravelHandler;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
@@ -9,13 +10,11 @@ use Illuminate\Contracts\Auth\Guard;
 class ActivityLogSupervisor
 {
     /**
-     * @var array logHandlers
+     * @var ActivityLogHandlerInterface[] logHandlers
      */
-    protected $logHandlers = [];
-
-    protected $auth;
-
-    protected $config;
+    protected array $logHandlers = [];
+    protected Guard $auth;
+    protected Repository $config;
 
     /**
      * Create the logsupervisor using a default Handler
