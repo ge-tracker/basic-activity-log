@@ -2,11 +2,10 @@
 
 namespace GeTracker\BasicActivityLog\Models;
 
-use Config;
-use Eloquent;
-use Exception;
+use Illuminate\Database\Eloquent\Model;
+use RuntimeException;
 
-class Activity extends Eloquent
+class Activity extends Model
 {
     /**
      * The database table used by the model.
@@ -14,6 +13,8 @@ class Activity extends Eloquent
      * @var string
      */
     protected $table = 'activity_log';
+
+    protected $guarded = ['id'];
 
     /**
      * Get the user that the activity belongs to.
@@ -25,24 +26,24 @@ class Activity extends Eloquent
         return $this->belongsTo($this->getAuthModelName(), 'user_id');
     }
 
+    /**
+     * Resolve Auth model name
+     *
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @throws RuntimeException
+     */
     public function getAuthModelName()
     {
+        // User defined model in config
         if (config('basic-activitylog.userModel')) {
             return config('basic-activitylog.userModel');
         }
 
-        //laravel 5.0 - 5.1
-        if (!is_null(config('auth.model'))) {
-            return config('auth.model');
-        }
-
-        //laravel 5.2
+        // Laravel 5.2+
         if (!is_null(config('auth.providers.users.model'))) {
             return config('auth.providers.users.model');
         }
 
-        throw new Exception('could not determine the model name for users');
+        throw new RuntimeException('could not determine the model name for users');
     }
-
-    protected $guarded = ['id'];
 }
